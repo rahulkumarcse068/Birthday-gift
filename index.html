@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday! 🎂</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    padding: 40px 20px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    z-index: 2;
+    animation: appear 1.2s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px #fff;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 30px #ffe0f0; }
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+.cake {
+    font-size: 90px;
+    margin: 20px 0;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+button {
+    background: white;
+    color: #ff4f81;
+    border: none;
+    padding: 14px 30px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 5px 20px rgba(255,255,255,0.5);
+}
+
+#message {
+    display: none;
+    margin-top: 25px;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    animation: appear 1s ease;
+}
+
+/* Floating balloons */
+.balloon {
+    position: fixed;
+    bottom: -150px;
+    font-size: 50px;
+    animation: float 8s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 10px;
+    height: 10px;
+    z-index: 10;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+@media(max-width: 480px) {
+    .container {
+        padding: 30px 18px;
+    }
+    .subtitle {
+        font-size: 1rem;
+    }
+    .cake {
+        font-size: 75px;
+    }
+    button {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎉 Happy Birthday! 🎉</h1>
+
+    <p class="subtitle">
+        Today is all about YOU! ❤️<br>
+        May your special day be filled with love,
+        laughter and endless happiness.
+    </p>
+
+    <div class="cake">🎂</div>
+
+    <h2>Make a Wish! ✨</h2>
+
+    <button onclick="showSurprise()">
+        🎁 Open Your Surprise
+    </button>
+
+    <div id="message">
+        💖 You deserve all the happiness in the world! 
+        May every dream come true and every moment
+        bring a beautiful smile to your face.
+
+        <br><br>
+        🥳 Keep smiling, keep shining, and enjoy
+        every second of your special day!
+
+        <br><br>
+        With lots of love! ❤️
+    </div>
+
+    <footer>
+        Made with ❤️ just for you
+    </footer>
+
+</div>
+
+<script>
+// Confetti animation
+function createConfetti() {
+    const colors = [
+        '#ffeb3b',
+        '#ff4081',
+        '#00e5ff',
+        '#ffffff',
+        '#76ff03',
+        '#ff9800'
+    ];
+
+    for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        confetti.style.animationDuration =
+            (Math.random() * 3 + 2) + 's';
+
+        confetti.style.animationDelay =
+            Math.random() * 2 + 's';
+
+        confetti.style.borderRadius =
+            Math.random() > 0.5 ? '50%' : '0';
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 7000);
+    }
+}
+
+// Initial confetti
+createConfetti();
+
+// Surprise button
+function showSurprise() {
+    document.getElementById('message').style.display = 'block';
+    createConfetti();
+}
+
+// Floating balloons
+const balloonEmojis = ['🎈', '🎈', '🎀', '💖'];
+
+function createBalloon() {
+    const balloon = document.createElement('div');
+    balloon.classList.add('balloon');
+
+    balloon.innerHTML =
+        balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+
+    balloon.style.left = Math.random() * 100 + 'vw';
+    balloon.style.animationDuration = (Math.random() * 5 + 6) + 's';
+
+    document.body.appendChild(balloon);
+
+    setTimeout(() => balloon.remove(), 11000);
+}
+
+setInterval(createBalloon, 1000);
+</script>
+
+</body>
+</html>
